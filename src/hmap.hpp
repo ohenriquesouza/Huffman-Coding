@@ -23,4 +23,5 @@ void printMap(unordered_map <string, Record>* mapa);
 void calculaHuffman(unordered_map <string, Record>* mapa);
 
 
+
 #endif

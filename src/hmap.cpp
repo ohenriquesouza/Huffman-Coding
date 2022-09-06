@@ -2,21 +2,31 @@
 
 void configuraArquvio(unordered_map <string, Record>* mapa){
 
-    ifstream myfile;
 	string line, auxiliar, auxiliar_2, delimiter = " ", aux;
 	size_t pos = 0;
+
+    ifstream myfile;
 	myfile.open("texto.txt");
 
-
+	//LEITURA, REMOÇÃO STOPWOPRD E CONTADOR DE PALAVRA
     if (myfile.is_open()) {
+
 		while(!myfile.eof()) {
+
 			getline(myfile, line);
+
 			aux = line;
+
 			while ((pos = line.find(delimiter)) != string::npos) {
+
 				aux = (line.substr(0, pos));
+
 				line.erase(0, pos + delimiter.size());
+
 				auxiliar = aux;
+
 				auxiliar_2 = string_treatment(auxiliar);
+
 				aux = auxiliar_2;
 
 				if (aux.compare("a")&&aux.compare("nos")&&aux.compare("à")&&aux.compare("e")&&aux.compare("ser")&&aux.compare("é")
@@ -43,13 +53,18 @@ void configuraArquvio(unordered_map <string, Record>* mapa){
 
 
 string string_treatment(string s) {
+
 	int size = s.size();
+
 	string aux;
 
 	for (int i = 0; i < size; i++) {
+
 		if (s[i] != '.' && s[i]!= ',' && s[i] != ':' && s[i] != ';' && s[i] != '?' && s[i] != '!' && s[i] != '(' && s[i] != ')' && s[i] != '[' && s[i] != ']' && s[i] != '{'
 			&& s[i] != '}' && s[i] != '+'&& s[i] != '=' && s[i] != '-' && s[i] != '*' && s[i] != '/' && s[i] != '%' && !isdigit(s[i])) {
+
 			s[i] = tolower(s[i]);
+
             aux += s[i];
 		}
 	}
@@ -57,18 +72,61 @@ string string_treatment(string s) {
 	return aux;
 }
 
-void printMap(unordered_map <string, Record>* mapa){
-    unordered_map<string, Record>::iterator itr;
-    for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++)
-    {
-        cout << itr->first << "  " << itr->second.record<< endl;
-    }
-}
+// void printMap(unordered_map <string, Record>* mapa){
+
+//     unordered_map<string, Record>::iterator itr;
+	
+//     for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++)
+//     {
+//         cout << itr->first << "  " << itr->second.record<< endl;
+//     }
+// }
 
 void calculaHuffman(unordered_map <string, Record>* mapa){
 
+	//DESCOBRIR PALAVRA MAIS RECORRENTE E MENOS RECORRENTE
+	unordered_map<string, Record>::iterator itr;
+
+	int MAIOR = 0, MENOR = 0, AUX = 0;
+
+	itr = (*mapa).begin();
+
+	 while(itr != (*mapa).end())
+    {
+		AUX = itr->second.record;
+
+		for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++){
+			
+			if(itr->second.record > MAIOR){
+
+			MAIOR = itr->second.record;
+
+			}
+
+			if(itr->second.record < AUX){
+
+			MENOR = itr->second.record;
+
+			}
+		}
+       
+    }
+
+	// cout << "A MAIOR RECORRENCIA FOI: " << MAIOR << endl;
+
+	// cout << "A MENOR RECORRENCIA FOI: " << MENOR << endl;
+
+	//NORMALIZAÇÃO PALAVRA
+	 for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++)
+    {
+
+		itr->second.huffman = (((float)itr->second.record) / (MAIOR - MENOR));
+
+		// cout <<"A PALAVRA "<< itr->first << " TEM O VALOR HUFFMAN = " << itr->second.huffman<< endl;
+		
+    }
+
 	
 
-
-
 }
+
