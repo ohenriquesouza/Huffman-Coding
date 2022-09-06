@@ -20,7 +20,7 @@ string string_treatment(string s);
 
 void printMap(unordered_map <string, Record>* mapa);
 
-void calculaHuffman();
+void calculaHuffman(unordered_map <string, Record>* mapa);
 
 
 #endif

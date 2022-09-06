@@ -64,3 +64,11 @@ void printMap(unordered_map <string, Record>* mapa){
         cout << itr->first << "  " << itr->second.record<< endl;
     }
 }
+
+void calculaHuffman(unordered_map <string, Record>* mapa){
+
+	
+
+
+
+}
