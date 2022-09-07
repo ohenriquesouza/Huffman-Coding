@@ -76,8 +76,8 @@ string string_treatment(string s) {
 
 //     unordered_map<string, Record>::iterator itr;
 	
-//     for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++)
-//     {
+//     for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++){
+
 //         cout << itr->first << "  " << itr->second.record<< endl;
 //     }
 // }
@@ -87,34 +87,41 @@ void calculaHuffman(unordered_map <string, Record>* mapa){
 	//DESCOBRIR PALAVRA MAIS RECORRENTE E MENOS RECORRENTE
 	unordered_map<string, Record>::iterator itr;
 
+	unordered_map<string, Record>::iterator itr2;
+
 	int MAIOR = 0, MENOR = 0, AUX = 0;
 
 	itr = (*mapa).begin();
 
-	 while(itr != (*mapa).end())
-    {
-		AUX = itr->second.record;
+	for (itr2 = (*mapa).begin(); itr2 != (*mapa).end(); itr2++){
+
+		AUX = itr2->second.record;
 
 		for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++){
 			
 			if(itr->second.record > MAIOR){
 
-			MAIOR = itr->second.record;
+				MAIOR = itr->second.record;
+
+				// cout << "NOVO MAIOR: "<<MAIOR<<endl;
 
 			}
 
 			if(itr->second.record < AUX){
 
-			MENOR = itr->second.record;
+				MENOR = itr->second.record;
+
+				// cout << "NOVO MENOR: "<<MENOR<<endl;
 
 			}
+
 		}
        
     }
 
-	// cout << "A MAIOR RECORRENCIA FOI: " << MAIOR << endl;
+	cout << "A MAIOR RECORRENCIA FOI: " << MAIOR << endl;
 
-	// cout << "A MENOR RECORRENCIA FOI: " << MENOR << endl;
+	cout << "A MENOR RECORRENCIA FOI: " << MENOR << endl;
 
 	//NORMALIZAÇÃO PALAVRA
 	 for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++)
