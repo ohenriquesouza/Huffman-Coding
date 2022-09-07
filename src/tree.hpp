@@ -5,26 +5,23 @@
 #include<stdlib.h>
 #include<stdbool.h>
 
-typedef struct Vertice Vertice;
-typedef struct Tree Tree;
-
-struct Vertice{
-	int key;
-	int value;
+struct Record{
+	int record;
+	float huffman;
 };
 
 struct Tree{
-	Vertice reg;
+	Record reg;
 	Tree *esq, *dir;
 };
 
 Tree* CreateTree();
 bool TVazia(Tree **t);
-void insertTree(Tree **t, Vertice v);
-void pesquisa(Tree **t, Tree **aux, Vertice v);
-int isInTree(Tree *t, Vertice v);
+void insertTree(Tree **t, Record r);
+void pesquisa(Tree **t, Tree **aux, Record r);
+int isInTree(Tree *t, Record r);
 
-void removeTree(Tree **t, Vertice v);
+void removeTree(Tree **t, Record r);
 void antecessor(Tree **t, Tree *aux);
 
 void preordem(Tree *t);

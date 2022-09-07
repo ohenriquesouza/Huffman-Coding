@@ -3,9 +3,7 @@
 
 int main(){
 
-    Tree* raiz = CreateTree();
-    Tree* aux = CreateTree();
-    Vertice v;
+    Tree* t = new Tree;
 
     unordered_map <string, Record>* mapa;
     mapa = new unordered_map<string, Record>;
@@ -15,6 +13,10 @@ int main(){
     // printMap(mapa);
 
     calculaHuffman(mapa);
+
+    insereArvore(mapa, &t);
+
+    central(t);
     
 
 }

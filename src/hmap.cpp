@@ -125,8 +125,55 @@ void calculaHuffman(unordered_map <string, Record>* mapa){
 		// cout <<"A PALAVRA "<< itr->first << " TEM O VALOR HUFFMAN = " << itr->second.huffman<< endl;
 		
     }
+}
 
+void insereArvore(unordered_map <string, Record>* mapa, Tree **t){
+
+	unordered_map<string, Record>::iterator itr;
+
+	vector <Tree*> valores;
+
+	for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++){
+
+		Tree* no;
+
+		TVazia(&no);
+
+		insertTree(&no, itr->second);
 	
+		valores.push_back(no);
+		
+    }
+
+	sort(valores.begin(), valores.end(), compare);
+
+	// for(long unsigned int i  = 0; i < valores.size(); i ++){
+		
+	// 	cout << valores[i]->reg.huffman<<endl;
+	// }
+
+	while(valores.size() != 1){
+
+		Tree* no = new Tree;
+
+		(no)->esq = valores[0]; 
+		(no)->dir = valores[1]; 
+		(no)->reg.huffman = (valores[0]->reg.huffman + valores[1]->reg.huffman); 
+
+		valores.erase(valores.begin());
+		valores.erase(valores.begin());
+
+		valores.push_back(no);
+
+		sort(valores.begin(), valores.end(), compare);
+	}
+
+	*t = valores[0]; 
 
 }
 
+bool compare(Tree* obj1, Tree* obj2){
+
+	return obj1->reg.huffman < obj2->reg.huffman;
+
+}

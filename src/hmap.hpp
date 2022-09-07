@@ -6,13 +6,10 @@
 #include <string>
 #include <unordered_map>
 #include <fstream>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
-
-struct Record{
-	int record;
-	float huffman;
-};
 
 void configuraArquvio(unordered_map <string, Record>* mapa);
 
@@ -21,6 +18,10 @@ string string_treatment(string s);
 void printMap(unordered_map <string, Record>* mapa);
 
 void calculaHuffman(unordered_map <string, Record>* mapa);
+
+void insereArvore(unordered_map <string, Record>* mapa, Tree **t);
+
+bool compare(Tree* obj1, Tree* obj2);
 
 
 

@@ -1,62 +1,63 @@
 #include "tree.hpp"
 
 Tree* CreateTree(){
-	return NULL;
+	return nullptr;
 }
 
 bool TVazia(Tree **t){
-  return *t == NULL;
+  return *t == nullptr;
 }
 
-void insertTree(Tree **t, Vertice v){
+void insertTree(Tree **t, Record r){
 
   if(TVazia(t)){
-    *t = (Tree*)malloc(sizeof(Tree));
-    (*t)->esq = NULL; 
-    (*t)->dir = NULL; 
-    (*t)->reg = v; 
+    *t = new Tree;
+    (*t)->esq = nullptr; 
+    (*t)->dir = nullptr; 
+    (*t)->reg.huffman = r.huffman; 
+    (*t)->reg.record = r.record;
   
   } else {
     
-    if(v.key < (*t)->reg.key){
-      insertTree(&(*t)->esq, v);
+    if(r.huffman < (*t)->reg.huffman){
+      insertTree(&(*t)->esq, r);
     }
     
-    if(v.key > (*t)->reg.key){
-      insertTree(&(*t)->dir, v);
+    if(r.huffman > (*t)->reg.huffman){
+      insertTree(&(*t)->dir, r);
     }
   
   }
 
 }
 
-void pesquisa(Tree **t, Tree **aux, Vertice v){
+void pesquisa(Tree **t, Tree **aux, Record r){
 
-  if(*t == NULL){
+  if(*t == nullptr){
     printf("[ERROR]: Node not found!");
     return;
   }
 
-  if((*t)->reg.key > v.key){ pesquisa(&(*t)->esq, aux, v); return;}
-  if((*t)->reg.key < v.key){ pesquisa(&(*t)->dir, aux, v); return;}
+  if((*t)->reg.huffman > r.huffman){ pesquisa(&(*t)->esq, aux, r); return;}
+  if((*t)->reg.huffman < r.huffman){ pesquisa(&(*t)->dir, aux, r); return;}
 
   *aux = *t;
 }
 
 
-int isInTree(Tree *t, Vertice v) {
+int isInTree(Tree *t, Record r) {
   
-  if(t == NULL){ 
+  if(t == nullptr){ 
     return 0;
   }
   
-  return t->reg.key == v.key || isInTree(t->esq, v) || isInTree(t->dir, v);
+  return t->reg.huffman == r.huffman || isInTree(t->esq, r) || isInTree(t->dir, r);
 }
 
 
 void antecessor(Tree **t, Tree *aux){ 
 
-	if ((*t)->dir != NULL){ 
+	if ((*t)->dir != nullptr){ 
 		antecessor(&(*t)->dir, aux);
 		return;
   }
@@ -68,25 +69,25 @@ void antecessor(Tree **t, Tree *aux){
 } 
 
 
-void removeTree(Tree **t, Vertice v){
+void removeTree(Tree **t, Record r){
 	Tree *aux;
   	
-  	if (*t == NULL){ 
+  	if (*t == nullptr){ 
   		printf("[ERROR]: Record not found!!!\n");
     	return;
   	}
 
-  	if (v.key < (*t)->reg.key){ removeTree(&(*t)->esq, v); return; }
-  	if (v.key > (*t)->reg.key){ removeTree(&(*t)->dir, v); return; }
+  	if (r.huffman < (*t)->reg.huffman){ removeTree(&(*t)->esq, r); return; }
+  	if (r.huffman > (*t)->reg.huffman){ removeTree(&(*t)->dir, r); return; }
 
-  	if ((*t)->dir == NULL){ 
+  	if ((*t)->dir == nullptr){ 
   		aux = *t;  
   		*t = (*t)->esq;
     	free(aux);
     	return;
   	}
 
-  	if ((*t)->esq != NULL){ antecessor(&(*t)->esq, *t); return; }
+  	if ((*t)->esq != nullptr){ antecessor(&(*t)->esq, *t); return; }
 
   	aux = *t;  
   	*t = (*t)->dir;
@@ -96,8 +97,8 @@ void removeTree(Tree **t, Vertice v){
 
 void preordem(Tree *t)
 {
-  if(!(t == NULL)){
-    printf("%d ", t->reg.key);
+  if(!(t == nullptr)){
+    printf("%f ", t->reg.huffman);
     preordem(t->esq); 
     preordem(t->dir); 
   }
@@ -106,19 +107,19 @@ void preordem(Tree *t)
 
 void central(Tree *t)
 {
-  if(!(t == NULL)){
+  if(!(t == nullptr)){
     central(t->esq); 
-    printf("%d ", t->reg.key);
+    printf("%f ", t->reg.huffman);
     central(t->dir); 
   }
 }
 
 void posordem(Tree *t)
 {
-  if(!(t == NULL)){
+  if(!(t == nullptr)){
     posordem(t->esq); 
     posordem(t->dir); 
-    printf("%d ", t->reg.key);
+    printf("%f ", t->reg.huffman);
   }
 }
 
@@ -133,15 +134,15 @@ void posordem(Tree *t)
 //   while (!isVazia(&q)){
 
 //     Desenfileira(&q, &no);
-//     printf("%d ", no.p->reg.key);
+//     printf("%d ", no.p->reg.huffman);
 
-//     if(no.p->esq != NULL){
+//     if(no.p->esq != nullptr){
 //       filho.p = no.p->esq;
 //       Enfileira(&q, filho);
 //       //printf(" Entrei esquerda! ");
 //     }
 
-//     if(no.p->dir != NULL){
+//     if(no.p->dir != nullptr){
 //       filho.p = no.p->dir;
 //       Enfileira(&q, filho);
 //       //printf(" Entrei direita! ");
