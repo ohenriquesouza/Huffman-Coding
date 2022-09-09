@@ -1,4 +1,5 @@
 #include "tree.hpp"
+#include "fila.hpp"
 
 Tree* CreateTree(){
 	return nullptr;
@@ -109,7 +110,7 @@ void central(Tree *t)
 {
   if(!(t == nullptr)){
     central(t->esq); 
-    printf("%f ", t->reg.huffman);
+    printf("%f\n ", t->reg.huffman);
     central(t->dir); 
   }
 }
@@ -122,33 +123,3 @@ void posordem(Tree *t)
     printf("%f ", t->reg.huffman);
   }
 }
-
-// void widthPath(Tree *t){
-//   Fila q;
-//   Item no, filho;
-  
-//   FFVazia(&q);
-//   no.p = t;
-//   Enfileira(&q, no);
-
-//   while (!isVazia(&q)){
-
-//     Desenfileira(&q, &no);
-//     printf("%d ", no.p->reg.huffman);
-
-//     if(no.p->esq != nullptr){
-//       filho.p = no.p->esq;
-//       Enfileira(&q, filho);
-//       //printf(" Entrei esquerda! ");
-//     }
-
-//     if(no.p->dir != nullptr){
-//       filho.p = no.p->dir;
-//       Enfileira(&q, filho);
-//       //printf(" Entrei direita! ");
-//     }
-
-//   }
-
-
-// }

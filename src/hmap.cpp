@@ -91,8 +91,6 @@ void calculaHuffman(unordered_map <string, Record>* mapa){
 
 	int MAIOR = 0, MENOR = 0, AUX = 0;
 
-	itr = (*mapa).begin();
-
 	for (itr2 = (*mapa).begin(); itr2 != (*mapa).end(); itr2++){
 
 		AUX = itr2->second.record;
@@ -119,9 +117,9 @@ void calculaHuffman(unordered_map <string, Record>* mapa){
        
     }
 
-	cout << "A MAIOR RECORRENCIA FOI: " << MAIOR << endl;
+	// cout << "A MAIOR RECORRENCIA FOI: " << MAIOR << endl;
 
-	cout << "A MENOR RECORRENCIA FOI: " << MENOR << endl;
+	// cout << "A MENOR RECORRENCIA FOI: " << MENOR << endl;
 
 	//NORMALIZAÇÃO PALAVRA
 	 for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++)
@@ -134,48 +132,55 @@ void calculaHuffman(unordered_map <string, Record>* mapa){
     }
 }
 
-void insereArvore(unordered_map <string, Record>* mapa, Tree **t){
+void insereArvore(unordered_map <string, Record>* mapa){
 
 	unordered_map<string, Record>::iterator itr;
 
-	vector <Tree*> valores;
+	vector <Tree*> vectorAux;
+
+	Tree *temp;
 
 	for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++){
 
-		Tree* no;
+		temp = new Tree;
 
-		TVazia(&no);
+		temp->reg.palavra = itr->first;
 
-		insertTree(&no, itr->second);
-	
-		valores.push_back(no);
-		
-    }
+		temp->reg.huffman = itr->second.huffman;
 
-	sort(valores.begin(), valores.end(), compare);
+		temp->esq = nullptr;
 
-	// for(long unsigned int i  = 0; i < valores.size(); i ++){
-		
-	// 	cout << valores[i]->reg.huffman<<endl;
-	// }
+		temp->dir = nullptr;
 
-	while(valores.size() != 1){
+		vectorAux.push_back(temp);
+
+	}
+
+	sort(vectorAux.begin(), vectorAux.end(), compare);
+
+	while(vectorAux.size() != 1){
 
 		Tree* no = new Tree;
 
-		(no)->esq = valores[0]; 
-		(no)->dir = valores[1]; 
-		(no)->reg.huffman = (valores[0]->reg.huffman + valores[1]->reg.huffman); 
+		vectorAux[0]->reg.bin = 0;
 
-		valores.erase(valores.begin());
-		valores.erase(valores.begin());
+		(no)->esq = vectorAux[0]; 
 
-		valores.push_back(no);
+		vectorAux[1]->reg.bin = 1;
 
-		sort(valores.begin(), valores.end(), compare);
+		(no)->dir = vectorAux[1]; 
+
+		(no)->reg.huffman = (vectorAux[0]->reg.huffman + vectorAux[1]->reg.huffman); 
+
+		vectorAux.erase(vectorAux.begin());
+		vectorAux.erase(vectorAux.begin());
+
+		vectorAux.push_back(no);
+
+		sort(vectorAux.begin(), vectorAux.end(), compare);
 	}
 
-	*t = valores[0]; 
+	widthPath(vectorAux[0]);
 
 }
 

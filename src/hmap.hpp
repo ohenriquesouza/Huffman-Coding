@@ -1,6 +1,7 @@
 #ifndef HMAP_HPP
 #define HMAP_HPP
 
+#include "fila.hpp"
 #include "tree.hpp"
 #include <iostream>
 #include <string>
@@ -19,7 +20,7 @@ void printMap(unordered_map <string, Record>* mapa);
 
 void calculaHuffman(unordered_map <string, Record>* mapa);
 
-void insereArvore(unordered_map <string, Record>* mapa, Tree **t);
+void insereArvore(unordered_map <string, Record>* mapa);
 
 bool compare(Tree* obj1, Tree* obj2);
 

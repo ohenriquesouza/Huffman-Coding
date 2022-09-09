@@ -4,10 +4,17 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include <iostream>
+#include <string>
+#include "tree.hpp"
+
+using namespace std;
 
 struct Record{
 	int record;
 	float huffman;
+	string palavra;
+	bool bin;
 };
 
 struct Tree{
