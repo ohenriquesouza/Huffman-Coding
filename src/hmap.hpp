@@ -22,6 +22,8 @@ void calculaHuffman(unordered_map <string, Record>* mapa);
 
 void insereArvore(unordered_map <string, Record>* mapa);
 
+void escreveArquivo(unordered_map <string, Record>* mapa, vector <Tree*> vectorAux);
+
 bool compare(Tree* obj1, Tree* obj2);
 
 

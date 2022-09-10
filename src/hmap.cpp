@@ -184,6 +184,61 @@ void insereArvore(unordered_map <string, Record>* mapa){
 
 }
 
+void escreveArquivo(unordered_map <string, Record>* mapa, vector <Tree*> vectorAux){
+
+	Block *temp;
+	vector <Bool> traducao;
+	ostream binaryFile;
+	binaryFile.open("saida.bin");
+
+	if(!binaryFile){
+
+		cout << "Unable to open file" << endl;
+		exit(1);
+
+	}
+
+	for (long unsigned int i = 0; i < vectorAux.size()){
+
+		temp = vectorAux->first->prox;
+
+		while(temp != nullptr){
+
+			if(vectorAux[i]->reg.palavra == temp->data.palavra){
+
+				for(size_t j = 0; j < temp->data.vectorAux.size(); j++){
+
+					if(temp->data.vectorAux[j]->reg.bin == '0'){
+						
+						traducao.push_back(false);
+
+					}
+
+					if(temp->data.vectorAux[j]->reg.bin == '1'){
+						
+						traducao.push_back(true);
+
+					}
+				}
+
+				for(size_t k = 0; k < traducao.size(); k++){
+
+					binaryFile << traducao[k];
+
+				}
+
+				binaryFile << " ";
+				traducao.clear();
+			}
+
+			temp = temp->prox;
+		}
+
+	}
+
+}
+
+
 bool compare(Tree* obj1, Tree* obj2){
 
 	return obj1->reg.huffman < obj2->reg.huffman;
