@@ -180,19 +180,19 @@ void insereArvore(unordered_map <string, Record>* mapa){
 	string auxiliarConc;
 	Lista l;
 	FLVazia(&l);
-	codificaArvore(&temp, l, auxiliarConc);
+	codificaArvore(&temp, l, " ");
 	escreveArquivo(&l, vectorAux);
 }
 
-void codificaArvore(Tree *temp, Lista l, string auxiliarConc){
+void codificaArvore(Tree **temp, Lista l, string auxiliarConc){
 
 	Item temporario;	
 
 	string CaminhaEsquerda, CaminhaDireita;
 
-	if (temp->dir == nullptr && temp->esq == nullptr){ 
+	if ((*temp)->dir == nullptr && (*temp)->esq == nullptr){ 
 		
-		temporario.palavra = temp->reg.palavra;
+		temporario.palavra = (*temp)->reg.palavra;
 
 		temporario.codificacao = auxiliarConc;
 
@@ -208,9 +208,9 @@ void codificaArvore(Tree *temp, Lista l, string auxiliarConc){
 
 		CaminhaDireita += '1';
 
-		codificaArvore(temp->esq, l, CaminhaEsquerda);
+		codificaArvore(&(*temp)->esq, l, CaminhaEsquerda);
 
-		codificaArvore(temp->dir, l, CaminhaDireita);
+		codificaArvore(&(*temp)->dir, l, CaminhaDireita);
 
 	}
 
@@ -224,10 +224,10 @@ void escreveArquivo(Lista *l, vector <Tree*> vectorAux ){
 
 	vector <bool> traducao;
 
-	ofstream binaryFile;
-	binaryFile.open("saida.bin");
+	ofstream myFile;
+	myFile.open("saida.txt");
 
-	if(!binaryFile){
+	if(!myFile){
 
 		cout << "Unable to open file" << endl;
 		exit(1);
@@ -254,7 +254,7 @@ void escreveArquivo(Lista *l, vector <Tree*> vectorAux ){
 
 				for(long unsigned int x = 0; x < traducao.size(); x++){
 
-					binaryFile<<traducao[x];
+					myFile<<traducao[x];
 
 				}
 
@@ -271,7 +271,7 @@ void escreveArquivo(Lista *l, vector <Tree*> vectorAux ){
 		cout << endl;
 	}
 
-	binaryFile.close();
+	myFile.close();
 }
 
 bool compare(Tree* obj1, Tree* obj2){
