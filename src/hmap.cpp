@@ -270,6 +270,8 @@ void escreveArquivo(Lista *l, vector <Tree*> vectorAux ){
 
 		cout << endl;
 	}
+
+	binaryFile.close();
 }
 
 bool compare(Tree* obj1, Tree* obj2){

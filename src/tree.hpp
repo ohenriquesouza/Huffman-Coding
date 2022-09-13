@@ -1,13 +1,12 @@
 #ifndef TREE_HPP 
 #define TREE_HPP
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include <iostream>
 #include <string>
 #include <vector>
-#include "lista.hpp"
 
 using namespace std;
 
