@@ -6,7 +6,8 @@
 #include<stdbool.h>
 #include <iostream>
 #include <string>
-#include "tree.hpp"
+#include <vector>
+#include "lista.hpp"
 
 using namespace std;
 
@@ -14,7 +15,6 @@ struct Record{
 	int record;
 	float huffman;
 	string palavra;
-	bool bin;
 };
 
 struct Tree{

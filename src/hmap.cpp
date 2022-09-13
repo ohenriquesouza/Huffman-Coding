@@ -162,11 +162,7 @@ void insereArvore(unordered_map <string, Record>* mapa){
 
 		Tree* no = new Tree;
 
-		vectorAux[0]->reg.bin = 0;
-
 		(no)->esq = vectorAux[0]; 
-
-		vectorAux[1]->reg.bin = 1;
 
 		(no)->dir = vectorAux[1]; 
 
@@ -180,15 +176,55 @@ void insereArvore(unordered_map <string, Record>* mapa){
 		sort(vectorAux.begin(), vectorAux.end(), compare);
 	}
 
-	widthPath(vectorAux[0]);
+	// cout << "CHEGOU NO FIM DA INSEREARVORE" <<endl;
+	string auxiliarConc;
+	Lista l;
+	FLVazia(&l);
+	codificaArvore(&temp, l, auxiliarConc);
+	escreveArquivo(&l, vectorAux);
+}
+
+void codificaArvore(Tree *temp, Lista l, string auxiliarConc){
+
+	Item temporario;	
+
+	string CaminhaEsquerda, CaminhaDireita;
+
+	if (temp->dir == nullptr && temp->esq == nullptr){ 
+		
+		temporario.palavra = temp->reg.palavra;
+
+		temporario.codificacao = auxiliarConc;
+
+		LInsert(&l, temporario); 
+
+  	}
+	else{
+
+		CaminhaEsquerda = auxiliarConc;
+		CaminhaDireita = auxiliarConc;
+
+		CaminhaEsquerda += '0';
+
+		CaminhaDireita += '1';
+
+		codificaArvore(temp->esq, l, CaminhaEsquerda);
+
+		codificaArvore(temp->dir, l, CaminhaDireita);
+
+	}
 
 }
 
-void escreveArquivo(unordered_map <string, Record>* mapa, vector <Tree*> vectorAux){
+void escreveArquivo(Lista *l, vector <Tree*> vectorAux ){
 
-	Block *temp;
-	vector <Bool> traducao;
-	ostream binaryFile;
+	// cout << "ENTREI NA FUNÇÃO ESCREVEARQUIVO" <<endl;
+
+	Block *ajudante;
+
+	vector <bool> traducao;
+
+	ofstream binaryFile;
 	binaryFile.open("saida.bin");
 
 	if(!binaryFile){
@@ -198,46 +234,43 @@ void escreveArquivo(unordered_map <string, Record>* mapa, vector <Tree*> vectorA
 
 	}
 
-	for (long unsigned int i = 0; i < vectorAux.size()){
+	for(long unsigned int i = 0; i < vectorAux.size(); i++){
+	
+		ajudante = l->first->prox;
 
-		temp = vectorAux->first->prox;
+		while(!(ajudante == nullptr)){
 
-		while(temp != nullptr){
+			if(vectorAux[i]->reg.palavra == ajudante->data.codificacao){
 
-			if(vectorAux[i]->reg.palavra == temp->data.palavra){
+				for(long unsigned int j = 0; j < ajudante->data.codificacao.size(); j++){
 
-				for(size_t j = 0; j < temp->data.vectorAux.size(); j++){
+					if(ajudante->data.codificacao[j] == '1'){
 
-					if(temp->data.vectorAux[j]->reg.bin == '0'){
-						
-						traducao.push_back(false);
+						traducao.push_back(1);
 
-					}
-
-					if(temp->data.vectorAux[j]->reg.bin == '1'){
-						
-						traducao.push_back(true);
-
-					}
+					}else
+						traducao.push_back(0);
 				}
 
-				for(size_t k = 0; k < traducao.size(); k++){
+				for(long unsigned int x = 0; x < traducao.size(); x++){
 
-					binaryFile << traducao[k];
+					binaryFile<<traducao[x];
 
 				}
 
-				binaryFile << " ";
-				traducao.clear();
+				for(long unsigned int y = 0; y < traducao.size(); y++){
+
+					traducao.erase(traducao.begin());
+				}
+
 			}
 
-			temp = temp->prox;
+			ajudante = ajudante->prox;
 		}
 
+		cout << endl;
 	}
-
 }
-
 
 bool compare(Tree* obj1, Tree* obj2){
 
