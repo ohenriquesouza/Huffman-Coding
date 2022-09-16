@@ -30,9 +30,9 @@ void configuraArquvio(map <string, Record>* mapa){
 				aux = auxiliar_2;
 
 				if (aux.compare("a")&&aux.compare("à")&&aux.compare("e")&&aux.compare("é")
-                &&aux.compare("uma")&&aux.compare("em")&&aux.compare("como")&&aux.compare("por")&&aux.compare("das")
-                &&aux.compare("dos")&&aux.compare("com")&&aux.compare("de")&&aux.compare("no")
-                &&aux.compare("na")&&aux.compare("que")&&aux.compare("se")&&aux.compare("não")){
+                &&aux.compare("ante")&&aux.compare("após")&&aux.compare("até")&&aux.compare("com")&&aux.compare("contra")
+                &&aux.compare("de")&&aux.compare("desde")&&aux.compare("em")&&aux.compare("entre")
+                &&aux.compare("para")&&aux.compare("trás")&&aux.compare("sob")&&aux.compare("sobre")&&aux.compare("per")&&aux.compare("sem")&&aux.compare("perante")&&aux.compare("por")){
 					
                     if((*mapa).find(aux) == (*mapa).end()){
 
