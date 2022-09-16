@@ -15,10 +15,10 @@ Para a conclusão dessa tarefa, utilizou-se a biblioteca <code>unordered_map</co
 <h2>Leitura e tratamento do arquivo</h2>
 Para a leitura, tratamento e contagem das palavras no arquivo de texto, utilizou-se da mesma estrutura do trabalho 'TF-IDF', o qual consegue tokenziar as linhas do texto, filtrando palavras julgadas desnecessárias e tratando acentuações e pontuações. A única alteração que a funçaõ original sofreu foi que agora, a palavra da vez, inserida dentro da variável [AUX] é buscada dentro do mapa. Caso já exista essa palavra, é somado +1 ao inteiro associado a ela, caso contrário, é inserida e o contador é inicado com 1.<br/>
 <h2>Cálculo do (RP)</h2>
-Como citado na função anterior, o mapa além das palavras, carrega consigo um valor inteiro referente a quantidade de reincidencias da mesma. No <strong>main()</strong>, a função <code>calculaHuffman</code> é chamada e recebe o mapa já com as palavras e seus devidos valores de repetição dentro. Aqui, é necessário sabermos qual foi a palavra que menos repetiu e a que menos repetiu, para ser possível fazer o cálculo do RP, onde sua fórmula é:
+Como citado na função anterior, o mapa além das palavras, carrega consigo um valor inteiro referente a quantidade de reincidencias da mesma. No <strong>main()</strong>, a função <code>calculaHuffman</code> é chamada e recebe o mapa já com as palavras e seus devidos valores de repetição dentro. Aqui, é necessário sabermos qual foi a palavra que menos repetiu e a que menos repetiu, para ser possível fazer o cálculo do RP, onde sua fórmula é:<br/>
 <div align="center">
 	<i>RP = RP / RP(max) - RP(min)</i> (1.0)
-</div>
+</div><br/>
 O 'RP' é o valor de <b>R</b>eincidência da <b>P</b>alavra. Este valor será usado na montagem da árvore, mas isso será explicado mais a frente.
 Para conseguir o 'RP(max)/(min)' foi usado uma estrutura muito simples, o BubbleSort. Cada repetição do looping compara todos os valores contidos no mapa com variáveis externas de valor fixo. Dessa forma, é certo que as variáveis 'MAIOR' e 'MENOR' ao final, carregarão respectivamente os maiores e menores valores de incidência. Agora é possível utilizar a fórmula (1.0) para calcular o RP de cada palavra.<br/>
 <h3>Normalização da palavra</h3>
