@@ -1,6 +1,6 @@
 #include "hmap.hpp"
 
-void configuraArquvio(unordered_map <string, Record>* mapa){
+void configuraArquvio(map <string, Record>* mapa){
 
 	string line, auxiliar, auxiliar_2, delimiter = " ", aux;
 	size_t pos = 0;
@@ -29,10 +29,10 @@ void configuraArquvio(unordered_map <string, Record>* mapa){
 
 				aux = auxiliar_2;
 
-				if (aux.compare("a")&&aux.compare("nos")&&aux.compare("à")&&aux.compare("e")&&aux.compare("ser")&&aux.compare("é")
-                &&aux.compare("uma")&&aux.compare("em")&&aux.compare("como")&&aux.compare("por")&&aux.compare("da")&&aux.compare("das")
-                &&aux.compare("dos")&&aux.compare("um")&&aux.compare("com")&&aux.compare("o")&&aux.compare("de")&&aux.compare("do")&&aux.compare("no")
-                &&aux.compare("na")&&aux.compare("que")&&aux.compare("se")&&aux.compare("ao")&&aux.compare("as")&&aux.compare("não")){
+				if (aux.compare("a")&&aux.compare("à")&&aux.compare("e")&&aux.compare("é")
+                &&aux.compare("uma")&&aux.compare("em")&&aux.compare("como")&&aux.compare("por")&&aux.compare("das")
+                &&aux.compare("dos")&&aux.compare("com")&&aux.compare("de")&&aux.compare("no")
+                &&aux.compare("na")&&aux.compare("que")&&aux.compare("se")&&aux.compare("não")){
 					
                     if((*mapa).find(aux) == (*mapa).end()){
 
@@ -63,8 +63,6 @@ string string_treatment(string s) {
 		if (s[i] != '.' && s[i]!= ',' && s[i] != ':' && s[i] != ';' && s[i] != '?' && s[i] != '!' && s[i] != '(' && s[i] != ')' && s[i] != '[' && s[i] != ']' && s[i] != '{'
 			&& s[i] != '}' && s[i] != '+'&& s[i] != '=' && s[i] != '-' && s[i] != '*' && s[i] != '/' && s[i] != '%' && !isdigit(s[i])) {
 
-			s[i] = tolower(s[i]);
-
             aux += s[i];
 		}
 	}
@@ -72,9 +70,9 @@ string string_treatment(string s) {
 	return aux;
 }
 
-// void printMap(unordered_map <string, Record>* mapa){
+// void printMap(map <string, Record>* mapa){
 
-//     unordered_map<string, Record>::iterator itr;
+//     map<string, Record>::iterator itr;
 	
 //     for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++){
 
@@ -82,12 +80,12 @@ string string_treatment(string s) {
 //     }
 // }
 
-void calculaHuffman(unordered_map <string, Record>* mapa){
+void calculaHuffman(map <string, Record>* mapa){
 
 	//DESCOBRIR PALAVRA MAIS RECORRENTE E MENOS RECORRENTE
-	unordered_map<string, Record>::iterator itr;
+	map<string, Record>::iterator itr;
 
-	unordered_map<string, Record>::iterator itr2;
+	map<string, Record>::iterator itr2;
 
 	int MAIOR = 0, MENOR = 0, AUX = 0;
 
@@ -132,9 +130,9 @@ void calculaHuffman(unordered_map <string, Record>* mapa){
     }
 }
 
-void insereArvore(unordered_map <string, Record>* mapa){
+void insereArvore(map <string, Record>* mapa){
 
-	unordered_map<string, Record>::iterator itr;
+	map<string, Record>::iterator itr;
 
 	vector <Tree*> vectorAux;
 
@@ -175,28 +173,36 @@ void insereArvore(unordered_map <string, Record>* mapa){
 
 		sort(vectorAux.begin(), vectorAux.end(), compare);
 	}
-
+    
+    //Tree* no = vectorAux[0];
+    
 	// cout << "CHEGOU NO FIM DA INSEREARVORE" <<endl;
+	
+	map <string, string>* huffman;
+	
+    huffman = new map<string, string>;
+    
 	string auxiliarConc;
-	Lista l;
-	FLVazia(&l);
-	codificaArvore(&temp, l, " ");
-	escreveArquivo(&l, vectorAux);
+	
+	codificaArvore(&vectorAux[0], "", huffman);
+	
+	// map <string, string>::iterator it;
+	
+	// for(it = (*huffman).begin(); it != (*huffman).end(); it++){
+	    
+	//     cout<<"PALAVRA '"<<it->first<<"' CODIGO: "<<it->second<<endl;
+	// }
+	
+	escreveArquivo(huffman);
 }
 
-void codificaArvore(Tree **temp, Lista l, string auxiliarConc){
-
-	Item temporario;	
+void codificaArvore(Tree **temp, string auxiliarConc, map<string, string >* huffman){
 
 	string CaminhaEsquerda, CaminhaDireita;
 
 	if ((*temp)->dir == nullptr && (*temp)->esq == nullptr){ 
 		
-		temporario.palavra = (*temp)->reg.palavra;
-
-		temporario.codificacao = auxiliarConc;
-
-		LInsert(&l, temporario); 
+		(*huffman)[(*temp)->reg.palavra] = auxiliarConc;
 
   	}
 	else{
@@ -208,68 +214,74 @@ void codificaArvore(Tree **temp, Lista l, string auxiliarConc){
 
 		CaminhaDireita += '1';
 
-		codificaArvore(&(*temp)->esq, l, CaminhaEsquerda);
+		codificaArvore(&(*temp)->esq, CaminhaEsquerda ,huffman);
 
-		codificaArvore(&(*temp)->dir, l, CaminhaDireita);
+		codificaArvore(&(*temp)->dir, CaminhaDireita ,huffman);
 
 	}
 
 }
 
-void escreveArquivo(Lista *l, vector <Tree*> vectorAux ){
+void escreveArquivo(map<string, string >* huffman){
 
 	// cout << "ENTREI NA FUNÇÃO ESCREVEARQUIVO" <<endl;
 
-	Block *ajudante;
+	map <string, string>::iterator it;
 
-	vector <bool> traducao;
+	vector <string>::iterator itr;
+
+	vector <string> token;
+
+	string tk;
+
+	string nline = "";
+
+	string line;
 
 	ofstream myFile;
 	myFile.open("saida.txt");
 
-	if(!myFile){
+	// cout << "ABRI O 'SAIDA' PARA ESCRITA" <<endl;
 
-		cout << "Unable to open file" << endl;
-		exit(1);
+	ifstream myFile2;
+	myFile2.open("texto.txt");
 
-	}
+	// cout << "ABRI O 'TEXTO' PARA LEITURA"<<endl;
 
-	for(long unsigned int i = 0; i < vectorAux.size(); i++){
-	
-		ajudante = l->first->prox;
+	if(!myFile2.eof()){
 
-		while(!(ajudante == nullptr)){
+		while(getline(myFile2, line)){
 
-			if(vectorAux[i]->reg.palavra == ajudante->data.codificacao){
+			stringstream aux(line);
 
-				for(long unsigned int j = 0; j < ajudante->data.codificacao.size(); j++){
+			while(getline(aux, tk, ' ')){
 
-					if(ajudante->data.codificacao[j] == '1'){
-
-						traducao.push_back(1);
-
-					}else
-						traducao.push_back(0);
-				}
-
-				for(long unsigned int x = 0; x < traducao.size(); x++){
-
-					myFile<<traducao[x];
-
-				}
-
-				for(long unsigned int y = 0; y < traducao.size(); y++){
-
-					traducao.erase(traducao.begin());
-				}
-
+				token.push_back(tk);
 			}
 
-			ajudante = ajudante->prox;
+			for(itr = token.begin(); itr != token.end(); ++itr){
+
+				it = huffman->find(*itr);
+
+				if(it != huffman->end()){
+
+					nline += it->second + " ";
+
+				}
+			}
+
+			myFile<<nline;
+			myFile<<endl;
+
+			nline = "";
+
+			token.clear();
+			
 		}
 
-		cout << endl;
 	}
+    
+	myFile2.close();
 
 	myFile.close();
 }

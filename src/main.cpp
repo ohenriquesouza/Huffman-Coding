@@ -3,8 +3,8 @@
 
 int main(){
 
-    unordered_map <string, Record>* mapa;
-    mapa = new unordered_map<string, Record>;
+    map <string, Record>* mapa;
+    mapa = new map<string, Record>;
 
     configuraArquvio(mapa);
 
@@ -13,5 +13,4 @@ int main(){
     calculaHuffman(mapa);
 
     insereArvore(mapa);
-
 }
