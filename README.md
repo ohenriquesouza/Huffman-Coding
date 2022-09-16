@@ -73,3 +73,6 @@ Para o funcionamento desejado, é necessário incluir as seguintes bibliotecas n
 </ul>
 <hr/>
 <h1>AUTOR 👤</h1>
+Criado por Henrique Souza Fagundes;
+
+Aluno do 4° periodo do curso de `Engenharia da Computação` no [CEFET-MG](https://www.cefetmg.br)
