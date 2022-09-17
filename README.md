@@ -54,7 +54,7 @@ Para escrever no arquivo, a função <code>escreveArquivo</code> irá abrir nova
 
 <hr/>
 <h1>REPRESENTAÇÃO GRÁFICA 📈</h1>
-Para demonstração, o teste será feito utilizando o arquivo mostrado na figura <b>(3)</b> com <i>74,337</i> (74,3MB).<br/>
+Para demonstração, o teste será feito utilizando o arquivo mostrado na figura <b>(3)</b> com <i>91,302</i> (91,3MB).<br/>
 <div align="center">
 <img src="imgs/docinicial.png">ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
 <i>Figura 3: Documento .txt no qual o programa irá compactar.</i>
@@ -64,7 +64,7 @@ Após a execução do programa, que pode demorar alguns segundos dependendo do t
 <img src="imgs/saida.png">ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
 <i>Figura 4: Documento .txt já compactado.</i>
 </div>
-Como é possível perceber, o arquivo teve seu tamanho reduzido em 34%, provando a eficácia do código. Pode-se concluir também que, para arquivos menores, a compactação é menos efetiva, ou seja, quanto maior o arquivo a ser compactado, melhor será o resultado.
+Como é possível perceber, o arquivo teve seu tamanho reduzido para <i>86,750</i> (86,7MB), ou seja, reduziu em 5%, provando a eficácia do código. Pode-se concluir também que, para arquivos menores, a compactação é menos eficiente, ou seja, quanto maior o arquivo a ser compactado, melhor será o resultado.
 
 
 
