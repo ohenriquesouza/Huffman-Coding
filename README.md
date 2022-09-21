@@ -84,16 +84,16 @@ O programa feito de acordo com a proposta possui um arquivo Makefile que realiza
 <h1>BIBLIOTECAS 📚</h1>
 Para o funcionamento desejado, é necessário incluir as seguintes bibliotecas no programa:<br/>
 <ul>
-	<li><code>#include <stdio.h>  </code></li>
-	<li><code>#include <stdlib.h></code></li>
-	<li><code>#include <stdbool.h></code></li>
-	<li><code>#include <iostream></code></li>
-	<li><code>#include <string></code></li>
-	<li><code>#include <sstream></code></li>
-	<li><code>#include <map></code></li>
-	<li><code>#include <fstream></code></li>
-	<li><code>#include <vector></code></li>
-	<li><code>#include <algorithm></code></li>
+	<li><code>#include 'stdio.h'  </code></li>
+	<li><code>#include 'stdlib.h'</code></li>
+	<li><code>#include 'stdbool.h'</code></li>
+	<li><code>#include 'iostream'</code></li>
+	<li><code>#include 'string'</code></li>
+	<li><code>#include 'sstream'</code></li>
+	<li><code>#include 'map'</code></li>
+	<li><code>#include 'fstream'</code></li>
+	<li><code>#include 'vector'</code></li>
+	<li><code>#include 'algorithm'</code></li>
 </ul>
 <hr/>
 <h1>AUTOR 👤</h1>
