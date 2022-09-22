@@ -1,5 +1,13 @@
 # HUFFMAN CODING 🖥️
 
+<div style="display: inline-block;">
+<img src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white"/>
+<img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/> 
+<img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"/> 
+<a href="https://github.com/mpiress/midpy/issues">
+</a> 
+</div>
+
 <h1>OBJETIVO 💡</h1>
 <p>Elabore uma árvore binária que utilize o código de Huffman para comprimir arquivos. Para tanto: <br/>
 	- [ X ] contabilizar a recorrência de cada palavra (RP) no arquivo; <br/>
