@@ -1,6 +1,6 @@
 #include "hmap.hpp"
 
-void configuraArquvio(map <string, Record>* mapa){
+void configuraArquvio(unordered_map <string, Record>* mapa){
 
 	string line, auxiliar, auxiliar_2, delimiter = " ", aux;
 	size_t pos = 0;
@@ -71,9 +71,9 @@ string string_treatment(string s) {
 	return aux;
 }
 
-// void printMap(map <string, Record>* mapa){
+// void printMap(unordered_map <string, Record>* mapa){
 
-//     map<string, Record>::iterator itr;
+//     unordered_map<string, Record>::iterator itr;
 	
 //     for (itr = (*mapa).begin(); itr != (*mapa).end(); itr++){
 
@@ -81,12 +81,12 @@ string string_treatment(string s) {
 //     }
 // }
 
-void calculaHuffman(map <string, Record>* mapa){
+void calculaHuffman(unordered_map <string, Record>* mapa){
 
 	//DESCOBRIR PALAVRA MAIS RECORRENTE E MENOS RECORRENTE
-	map<string, Record>::iterator itr;
+	unordered_map<string, Record>::iterator itr;
 
-	map<string, Record>::iterator itr2;
+	unordered_map<string, Record>::iterator itr2;
 
 	int MAIOR = 0, MENOR = 0, AUX = 0;
 
@@ -131,9 +131,9 @@ void calculaHuffman(map <string, Record>* mapa){
     }
 }
 
-void insereArvore(map <string, Record>* mapa){
+void insereArvore(unordered_map <string, Record>* mapa){
 
-	map<string, Record>::iterator itr;
+	unordered_map<string, Record>::iterator itr;
 
 	vector <Tree*> vectorAux;
 
@@ -179,9 +179,9 @@ void insereArvore(map <string, Record>* mapa){
     
 	// cout << "CHEGOU NO FIM DA INSEREARVORE" <<endl;
 	
-	map <string, string>* huffman;
+	unordered_map <string, string>* huffman;
 	
-    huffman = new map<string, string>;
+    huffman = new unordered_map<string, string>;
     
 	string auxiliarConc;
 	
@@ -197,7 +197,7 @@ void insereArvore(map <string, Record>* mapa){
 	escreveArquivo(huffman);
 }
 
-void codificaArvore(Tree **temp, string auxiliarConc, map<string, string >* huffman){
+void codificaArvore(Tree **temp, string auxiliarConc, unordered_map<string, string >* huffman){
 
 	string CaminhaEsquerda, CaminhaDireita;
 
@@ -223,11 +223,11 @@ void codificaArvore(Tree **temp, string auxiliarConc, map<string, string >* huff
 
 }
 
-void escreveArquivo(map<string, string >* huffman){
+void escreveArquivo(unordered_map<string, string >* huffman){
 
 	// cout << "ENTREI NA FUNÇÃO ESCREVEARQUIVO" <<endl;
 
-	map <string, string>::iterator it;
+	unordered_map <string, string>::iterator it;
 
 	vector <string>::iterator itr;
 

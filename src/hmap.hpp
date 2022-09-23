@@ -5,26 +5,26 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <map>
+#include <unordered_map>
 #include <fstream>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
-void configuraArquvio(map <string, Record>* mapa);
+void configuraArquvio(unordered_map <string, Record>* mapa);
 
 string string_treatment(string s);
 
-void printMap(map <string, Record>* mapa);
+void printMap(unordered_map <string, Record>* mapa);
 
-void calculaHuffman(map <string, Record>* mapa);
+void calculaHuffman(unordered_map <string, Record>* mapa);
 
-void insereArvore(map <string, Record>* mapa);
+void insereArvore(unordered_map <string, Record>* mapa);
 
-void codificaArvore(Tree **temp, string auxiliarConc, map <string, string>* huffman);
+void codificaArvore(Tree **temp, string auxiliarConc, unordered_map <string, string>* huffman);
 
-void escreveArquivo(map<string, string >* huffman);
+void escreveArquivo(unordered_map<string, string >* huffman);
 
 bool compare(Tree* obj1, Tree* obj2);
 

@@ -3,8 +3,8 @@
 
 int main(){
 
-    map <string, Record>* mapa;
-    mapa = new map<string, Record>;
+    unordered_map <string, Record>* mapa;
+    mapa = new unordered_map<string, Record>;
 
     configuraArquvio(mapa);
 
