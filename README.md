@@ -99,7 +99,7 @@ Para o funcionamento desejado, é necessário incluir as seguintes bibliotecas n
 	<li><code>#include 'iostream'</code></li>
 	<li><code>#include 'string'</code></li>
 	<li><code>#include 'sstream'</code></li>
-	<li><code>#include 'map'</code></li>
+	<li><code>#include 'unordered_map'</code></li>
 	<li><code>#include 'fstream'</code></li>
 	<li><code>#include 'vector'</code></li>
 	<li><code>#include 'algorithm'</code></li>
